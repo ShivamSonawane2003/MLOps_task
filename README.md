@@ -1,0 +1,239 @@
+# LLM Chatbot Service
+
+A minimal but production-oriented chatbot service built with FastAPI, LangChain, and LangGraph. Demonstrates MLOps fundamentals, DAG-based routing, and multi-user session management.
+
+## Features
+
+- **LLM Integration**: OpenAI GPT-3.5-turbo via LangChain
+- **Intelligent Routing**: LangGraph DAG routes to calculator or LLM based on input
+- **Multi-User Support**: Session-based memory per user (in-memory storage)
+- **Conversation Memory**: ConversationBufferMemory persists context within sessions
+- **Monitoring**: Tracks request latency and throughput
+- **Logging**: Per-module file-based logging
+- **Docker Ready**: Containerized deployment
+
+## Project Structure
+
+```
+.
+├── app/
+│   ├── main.py            # FastAPI entry point
+│   ├── llm.py             # OpenAI model and prompts
+│   ├── memory.py          # Session memory management
+│   ├── graph.py           # LangGraph DAG definition
+│   ├── calculator.py      # Calculator node
+│   ├── monitoring.py      # Latency and throughput tracking
+│   └── logging_utils.py   # Logger setup
+├── logs/                  # Auto-created, stores *.log files
+├── scripts/
+│   └── test_endpoint.py   # Test script for /chat endpoint
+├── requirements.txt       # Python dependencies
+├── Dockerfile             # Docker image definition
+└── README.md              # This file
+```
+
+## Setup
+
+### Prerequisites
+
+- Python 3.10+
+- OpenAI API key
+
+### Local Installation
+
+1. Clone the repository and navigate to the project:
+```bash
+cd MLops_task
+```
+
+2. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Set your OpenAI API key:
+```bash
+export OPENAI_API_KEY="sk-..."  # On Windows: set OPENAI_API_KEY=sk-...
+```
+
+### Running Locally
+
+Start the FastAPI server:
+```bash
+cd app
+python main.py
+```
+
+The server runs at `http://localhost:8000`. Check health at `http://localhost:8000/health`.
+
+### Testing
+
+Run the test suite in another terminal:
+
+**Test 1: Core Features (Router, Calculator, Memory, Monitoring)**
+```bash
+cd scripts
+python test_core_features.py
+```
+
+**Test 2: Module Imports**
+```bash
+python test_modules.py
+```
+
+Check `logs/` directory for request logs after running tests.
+
+## Docker
+
+### Build the Image
+
+```bash
+docker build -t llm-chatbot:latest .
+```
+
+### Run the Container
+
+```bash
+docker run -p 8000:8000 \
+  -e OPENAI_API_KEY="sk-..." \
+  -v $(pwd)/logs:/app/logs \
+  llm-chatbot:latest
+```
+
+The service will be available at `http://localhost:8000`.
+
+## API
+
+### POST /chat
+
+Send a message and get a response.
+
+**Request:**
+```json
+{
+  "session_id": "user123",
+  "message": "Hello"
+}
+```
+
+**Response:**
+```json
+{
+  "response": "Hi! How can I help you?",
+  "session_id": "user123"
+}
+```
+
+### GET /health
+
+Health check endpoint.
+
+**Response:**
+```json
+{
+  "status": "healthy"
+}
+```
+
+## Multi-User Sessions
+
+Each `session_id` maintains separate conversation memory:
+
+```python
+# User 1
+POST /chat with session_id="alice", message="My name is Alice"
+POST /chat with session_id="alice", message="What's my name?"  # Remembers Alice
+
+# User 2 (separate memory)
+POST /chat with session_id="bob", message="I'm Bob"
+POST /chat with session_id="bob", message="Who am I?"  # Remembers Bob, not Alice
+```
+
+**Note:** Memory is stored in-memory and will be lost when the server restarts. For production, replace the dictionary in `memory.py` with a persistent store (Redis, PostgreSQL, etc.).
+
+## LangGraph DAG
+
+The routing DAG is defined in `graph.py`:
+
+```
+Input → Router → [Calculator OR LLM] → Output
+```
+
+**Router Logic:**
+- If input contains numbers + math operators → Calculator node
+- Else → LLM node
+
+The router is simple and heuristic-based. To add complexity, modify `router_node()` in `graph.py`.
+
+## Prompts
+
+Three prompt variants are defined in `llm.py`:
+
+- **professional**: Concise, business-like responses
+- **friendly**: Conversational, approachable tone
+- **minimal**: Very brief answers
+
+The **professional** variant is used by default. Switch by changing `DEFAULT_PROMPT_KEY` in `llm.py`.
+
+## Monitoring
+
+Each request logs:
+- Session ID and input message
+- Latency (seconds)
+- Routing decision
+- Response snippet
+
+View logs:
+```bash
+tail -f logs/main.log          # API requests
+tail -f logs/llm.log           # LLM operations
+tail -f logs/graph.log         # Graph routing
+tail -f logs/monitoring.log    # Latency and throughput
+```
+
+## Environment Variables
+
+- `OPENAI_API_KEY`: Your OpenAI API key (required)
+
+## Limitations
+
+- **Session Storage**: In-memory only. Sessions are lost on restart.
+- **Concurrency**: No database locks. If multiple threads modify the same session, behavior is undefined.
+- **Calculator**: Simple math expressions only (no functions or variables).
+
+## Troubleshooting
+
+**ImportError: No module named 'langchain'**
+```bash
+pip install -r requirements.txt
+```
+
+**OPENAI_API_KEY not set**
+```bash
+export OPENAI_API_KEY="sk-..."
+```
+
+**Port 8000 already in use**
+```bash
+python -c "import app.main; import uvicorn; uvicorn.run(app.main.app, host='0.0.0.0', port=8001)"
+```
+
+## Development Notes
+
+This codebase prioritizes clarity and simplicity:
+- Functions are preferred over classes
+- No unnecessary abstraction
+- Logging captures meaningful events only
+- Code should be readable by junior engineers
+
+Modifications are encouraged. Start by editing `graph.py` to add new nodes or routing logic.
+
+## License
+
+MIT
