@@ -223,17 +223,3 @@ export OPENAI_API_KEY="sk-..."
 ```bash
 python -c "import app.main; import uvicorn; uvicorn.run(app.main.app, host='0.0.0.0', port=8001)"
 ```
-
-## Development Notes
-
-This codebase prioritizes clarity and simplicity:
-- Functions are preferred over classes
-- No unnecessary abstraction
-- Logging captures meaningful events only
-- Code should be readable by junior engineers
-
-Modifications are encouraged. Start by editing `graph.py` to add new nodes or routing logic.
-
-## License
-
-MIT
