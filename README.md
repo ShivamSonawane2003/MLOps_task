@@ -36,7 +36,7 @@ A minimal but production-oriented chatbot service built with FastAPI, LangChain,
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.11+
 - Google Gemini API key (get one at https://makersuite.google.com/app/apikey)
 
 ### Local Installation
