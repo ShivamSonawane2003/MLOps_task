@@ -1,9 +1,9 @@
 from langgraph.graph import StateGraph
 from typing_extensions import TypedDict
-from .llm import create_llm_chain
-from .calculator import calculate
-from .memory import get_or_create_memory, add_to_memory, get_memory_context
-from .logging_utils import setup_logger
+from app.llm import create_llm_chain
+from app.calculator import calculate
+from app.memory import get_or_create_memory, add_to_memory, get_memory_context
+from app.logging_utils import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -14,32 +14,40 @@ class ChatState(TypedDict):
     message: str
     response: str
     route: str
+    prompt_variant: str  # Added for prompt variant selection
 
 
 def router_node(state: ChatState) -> ChatState:
     """Route to calculator or LLM based on content."""
     message = state["message"].lower()
+    session_id = state["session_id"]
     
     # Check if it's a math expression
     if any(op in message for op in ['+', '-', '*', '/', '%', '**']):
         if any(char.isdigit() for char in message):
             state["route"] = "calculator"
-            logger.info(f"Routing to calculator: {message}")
+            logger.info(f"[{session_id}] ROUTER DECISION: Calculator Node | Input: '{state['message']}'")
             return state
     
     state["route"] = "llm"
-    logger.info(f"Routing to LLM: {message}")
+    logger.info(f"[{session_id}] ROUTER DECISION: LLM Node | Input: '{state['message']}'")
     return state
 
 
 def calculator_node(state: ChatState) -> ChatState:
     """Process math expressions."""
-    result = calculate(state["message"])
+    session_id = state["session_id"]
+    message = state["message"]
+    
+    logger.info(f"[{session_id}] CALCULATOR NODE PROCESSING: '{message}'")
+    
+    result = calculate(message)
     if result:
         state["response"] = result
-        logger.info(f"Calculator result: {result}")
+        logger.info(f"[{session_id}] CALCULATOR NODE OUTPUT: {result}")
     else:
         state["response"] = "I couldn't calculate that expression."
+        logger.info(f"[{session_id}] CALCULATOR NODE: Could not process expression")
     
     return state
 
@@ -48,16 +56,40 @@ def llm_node(state: ChatState) -> ChatState:
     """Generate response using LLM with memory."""
     session_id = state["session_id"]
     user_message = state["message"]
+    prompt_variant = state.get("prompt_variant", "professional")  # Default to professional
+    
+    logger.info(f"[{session_id}] LLM NODE PROCESSING: '{user_message}' | Prompt Variant: {prompt_variant}")
     
     memory = get_or_create_memory(session_id)
     memory_context = get_memory_context(session_id)
+    
+    if memory_context:
+        logger.info(f"[{session_id}] LLM NODE: Using conversation history (memory active)")
     
     # Build input with memory context
     input_text = user_message
     if memory_context:
         input_text = f"Previous context:\n{memory_context}\n\nNew message: {user_message}"
     
-    chain = create_llm_chain()
+    # Create chain with selected prompt variant
+    from app.llm import get_llm, get_prompt_template
+    llm = get_llm()
+    prompt = get_prompt_template(prompt_variant)
+    
+    # Create the chain
+    class PromptLLMChain:
+        def __init__(self, prompt_template, llm_model):
+            self.prompt_template = prompt_template
+            self.llm_model = llm_model
+        
+        def invoke(self, inputs):
+            formatted_prompt = self.prompt_template.format(**inputs)
+            response = self.llm_model.invoke({"input": formatted_prompt})
+            return response
+    
+    chain = PromptLLMChain(prompt, llm)
+    
+    logger.info(f"[{session_id}] LLM NODE: Calling Google Gemini API...")
     response = chain.invoke({"input": input_text})
     
     # Extract text from response
@@ -66,11 +98,13 @@ def llm_node(state: ChatState) -> ChatState:
     else:
         response_text = str(response)
     
+    logger.info(f"[{session_id}] LLM NODE OUTPUT: {response_text[:150]}...")
+    
     # Save to memory
     add_to_memory(session_id, user_message, response_text)
+    logger.info(f"[{session_id}] LLM NODE: Saved to conversation memory")
     
     state["response"] = response_text
-    logger.info(f"LLM response for {session_id}: {response_text[:100]}...")
     
     return state
 

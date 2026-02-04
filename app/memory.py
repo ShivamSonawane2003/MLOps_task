@@ -1,5 +1,5 @@
 from langchain.memory import ConversationBufferMemory
-from .logging_utils import setup_logger
+from app.logging_utils import setup_logger
 
 logger = setup_logger(__name__)
 
