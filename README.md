@@ -4,7 +4,7 @@ A minimal but production-oriented chatbot service built with FastAPI, LangChain,
 
 ## Features
 
-- **LLM Integration**: OpenAI GPT-3.5-turbo via LangChain
+- **LLM Integration**: Google Gemini API via LangChain
 - **Intelligent Routing**: LangGraph DAG routes to calculator or LLM based on input
 - **Multi-User Support**: Session-based memory per user (in-memory storage)
 - **Conversation Memory**: ConversationBufferMemory persists context within sessions
@@ -37,7 +37,7 @@ A minimal but production-oriented chatbot service built with FastAPI, LangChain,
 ### Prerequisites
 
 - Python 3.10+
-- OpenAI API key
+- Google Gemini API key (get one at https://makersuite.google.com/app/apikey)
 
 ### Local Installation
 
@@ -57,20 +57,32 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Set your OpenAI API key:
+4. Create a `.env` file in the project root and add your Google API key:
 ```bash
-export OPENAI_API_KEY="sk-..."  # On Windows: set OPENAI_API_KEY=sk-...
+GEMINI_API_KEY=your_api_key_here
+```
+
+Or set it as an environment variable:
+```bash
+export GEMINI_API_KEY="your_api_key_here"  # On Windows: set GEMINI_API_KEY=your_api_key_here
 ```
 
 ### Running Locally
 
-Start the FastAPI server:
+Start the FastAPI server from the project root:
 ```bash
-cd app
-python main.py
+uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-The server runs at `http://localhost:8000`. Check health at `http://localhost:8000/health`.
+Or from the app directory:
+```bash
+cd app
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+The server runs at `http://localhost:8000`. Check health at `http://localhost:8000/health`. 
+
+Access the test UI at `http://localhost:8000/test_ui`.
 
 ### Testing
 
@@ -101,8 +113,16 @@ docker build -t llm-chatbot:latest .
 
 ```bash
 docker run -p 8000:8000 \
-  -e OPENAI_API_KEY="sk-..." \
+  -e GEMINI_API_KEY="your_api_key_here" \
   -v $(pwd)/logs:/app/logs \
+  llm-chatbot:latest
+```
+
+On Windows (PowerShell):
+```powershell
+docker run -p 8000:8000 `
+  -e GEMINI_API_KEY="your_api_key_here" `
+  -v ${PWD}/logs:/app/logs `
   llm-chatbot:latest
 ```
 
@@ -199,7 +219,7 @@ tail -f logs/monitoring.log    # Latency and throughput
 
 ## Environment Variables
 
-- `OPENAI_API_KEY`: Your OpenAI API key (required)
+- `GEMINI_API_KEY`: Your Google Gemini API key (required)
 
 ## Limitations
 
@@ -214,9 +234,16 @@ tail -f logs/monitoring.log    # Latency and throughput
 pip install -r requirements.txt
 ```
 
-**OPENAI_API_KEY not set**
+**GEMINI_API_KEY not set**
+
+Create a `.env` file with:
+```
+GEMINI_API_KEY=your_api_key_here
+```
+
+Or set environment variable:
 ```bash
-export OPENAI_API_KEY="sk-..."
+export GEMINI_API_KEY="your_api_key_here"  # On Windows: set GEMINI_API_KEY=your_api_key_here
 ```
 
 **Port 8000 already in use**
