@@ -30,13 +30,11 @@ def add_to_memory(session_id, user_input, ai_response):
 
 
 def get_memory_context(session_id):
-    """Get conversation history for a session."""
     memory = get_or_create_memory(session_id)
     return memory.buffer
 
 
 def clear_session(session_id):
-    """Clear memory for a session."""
     if session_id in sessions:
         del sessions[session_id]
         logger.info(f"Cleared memory for session: {session_id}")
