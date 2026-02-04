@@ -1,35 +1,18 @@
 2026-02-03 23:26:15,879 - app.monitoring - WARNING - Attempted to record request with None latency
 2026-02-03 23:26:32,414 - app.monitoring - WARNING - Attempted to record request with None latency
-2026-02-03 23:29:23,557 - app.monitoring - INFO - 
-======================================================================
 2026-02-03 23:29:23,557 - app.monitoring - INFO - REQUEST #1 COMPLETED
-2026-02-03 23:29:23,557 - app.monitoring - INFO - ======================================================================
 2026-02-03 23:29:23,557 - app.monitoring - INFO - Session ID: fixed_test1
 2026-02-03 23:29:23,557 - app.monitoring - INFO - Message: '150 / 5'
 2026-02-03 23:29:23,557 - app.monitoring - INFO - Route Taken: CALCULATOR
-2026-02-03 23:29:23,557 - app.monitoring - INFO - ----------------------------------------------------------------------
 2026-02-03 23:29:23,557 - app.monitoring - INFO - REQUEST METRICS:
-2026-02-03 23:29:23,577 - app.monitoring - INFO - ======================================================================
-
-2026-02-03 23:29:51,223 - app.monitoring - INFO - 
-======================================================================
 2026-02-03 23:29:51,223 - app.monitoring - INFO - REQUEST #2 COMPLETED
-2026-02-03 23:29:51,223 - app.monitoring - INFO - ======================================================================
 2026-02-03 23:29:51,223 - app.monitoring - INFO - Session ID: fixed_test2
 2026-02-03 23:29:51,223 - app.monitoring - INFO - Message: 'Explain FastAPI briefly'
 2026-02-03 23:29:51,223 - app.monitoring - INFO - Route Taken: LLM
-2026-02-03 23:29:51,223 - app.monitoring - INFO - ----------------------------------------------------------------------
 2026-02-03 23:29:51,223 - app.monitoring - INFO - REQUEST METRICS:
-2026-02-03 23:29:51,246 - app.monitoring - INFO - ======================================================================
-
-2026-02-03 23:30:34,536 - app.monitoring - INFO - 
-======================================================================
 2026-02-03 23:30:34,536 - app.monitoring - INFO - REQUEST #3 COMPLETED
-2026-02-03 23:30:34,536 - app.monitoring - INFO - ======================================================================
 2026-02-03 23:30:34,536 - app.monitoring - INFO - Session ID: comprehensive_test
 2026-02-03 23:30:34,536 - app.monitoring - INFO - Message: '200 - 55'
 2026-02-03 23:30:34,536 - app.monitoring - INFO - Route Taken: CALCULATOR
-2026-02-03 23:30:34,536 - app.monitoring - INFO - ----------------------------------------------------------------------
 2026-02-03 23:30:34,536 - app.monitoring - INFO - REQUEST METRICS:
-2026-02-03 23:30:34,550 - app.monitoring - INFO - ======================================================================
 
