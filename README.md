@@ -70,7 +70,9 @@ FastAPI Backend (Render)
 │   └── logging_utils.py   # Logger setup
 ├── logs/                  # Auto-created, stores *.log files
 ├── scripts/
-│   └── test_endpoint.py   # Test script for /chat endpoint
+│   ├── test_api.py                # Test script for /chat endpoint
+│   ├── test_core_features.py      # Test core features (router, calculator, memory)
+│   └── test_modules.py            # Test module imports
 ├── requirements.txt       # Python dependencies
 ├── Dockerfile             # Docker image definition
 └── README.md              # This file
