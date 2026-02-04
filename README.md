@@ -40,15 +40,12 @@ https://mlops-task-jrvu.onrender.com/health
 
 ### Deployed Architecture
 
-Browser (GitHub Pages)
-        |
-        | HTTPS (POST /chat)
-        v
-FastAPI Backend (Render)
-        |
-        | LangGraph Router
-        |-- Calculator Node
-        |-- Gemini LLM Node
+- Browser (GitHub Pages)
+  - Sends HTTPS POST requests to `/chat`
+- FastAPI Backend (Render)
+  - LangGraph Router
+    - Calculator Node
+    - Gemini LLM Node
 
 ---
 
