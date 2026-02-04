@@ -176,73 +176,41 @@
             gap: 12px;
         }
 
-        .input-row {
-    display: flex;
-    gap: 16px;           /* more breathing room */
-    align-items: center; /* better vertical alignment */
-    flex-wrap: wrap;
-}
         .prompt-select {
-            flex: 1;
-            width: 100%;
-            height: 53px;                  /* consistent with textarea height */
-            padding: 0 16px 0 18px;        /* asymmetric padding for arrow space */
+            width: auto;
+            min-width: 200px;
+            height: 53px;
+            padding: 0 46px 0 18px;
             font-size: 0.95rem;
             font-weight: 500;
             color: var(--text-primary);
-            background: rgba(35, 35, 60, 0.55);   /* slightly darker glass */
+            background: rgba(35, 35, 60, 0.55);
             border: 1px solid var(--surface-border);
             border-radius: var(--radius-sm);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             box-shadow: inset 0 1px 4px rgba(0,0,0,0.2);
             transition: all 0.2s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23a0a0c0' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px 6px;
         }
 
-        .prompt-select {
-            position: relative;
-        }
-
-        .prompt-select::after {
-            content: "▼";
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.72rem;
-            color: var(--text-secondary);
-            pointer-events: none;
-            transition: all 0.2s ease;
-            opacity: 0.8;
-        }
-
-        .prompt-select:focus::after,
-        .prompt-select:active::after {
-            transform: translateY(-50%) rotate(180deg);
-            color: var(--accent);
-            opacity: 1;
-        }
-
-
-        /* Optional: subtle label-like floating effect when value is selected */
         .prompt-select option {
-            background: #1a1a2e;       /* dark background for dropdown panel */
+            background: #1a1a2e;
             color: var(--text-primary);
             padding: 10px 16px;
             font-size: 0.95rem;
         }
 
-        /* Some browsers allow limited option styling — this helps a bit */
         .prompt-select option:checked,
         .prompt-select option:hover {
             background: linear-gradient(to right, var(--accent-dark), #4f46e5);
             color: white;
-        }
-
-
-        .session-input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.7;
         }
 
         .message-input {
@@ -258,9 +226,7 @@
             line-height: 1.5;
         }
 
-        .session-input:focus,
         .prompt-select:focus,
-        .session-input:hover,
         .prompt-select:hover {
             border-color: var(--accent);
             box-shadow: 
@@ -319,16 +285,15 @@
     <div class="chat-messages" id="chatMessages"></div>
 
     <div class="input-area">
-            <select 
-                id="promptVariant" 
-                class="prompt-select session-input"
-                aria-label="Response style variant"
-            >
-                <option value="professional" selected>Professional</option>
-                <option value="friendly">Friendly & Conversational</option>
-                <option value="minimal">Minimal / Raw Output</option>
-            </select>
-        </div>
+        <select 
+            id="promptVariant" 
+            class="prompt-select"
+            aria-label="Response style variant"
+        >
+            <option value="professional" selected>Professional</option>
+            <option value="friendly">Friendly & Conversational</option>
+            <option value="minimal">Minimal / Raw Output</option>
+        </select>
 
         <div style="display:flex; gap:12px; align-items: flex-end; justify-content: space-between;">
             <textarea 
@@ -336,8 +301,7 @@
                 class="message-input" 
                 placeholder="Ask anything..." 
                 rows="2"
-                style="width: 100%;
-    height: 50px;"
+                style="width: 100%; height: 50px;"
             ></textarea>
             <button class="send-btn" id="sendBtn">Send</button>
         </div>
@@ -347,7 +311,6 @@
 <script>
     const chatMessages = document.getElementById('chatMessages');
     const messageInput = document.getElementById('messageInput');
-    const sessionIdInput = document.getElementById('sessionId');
     const promptVariantSelect = document.getElementById('promptVariant');
     const sendBtn = document.getElementById('sendBtn');
     const API_BASE_URL = "https://mlops-task-jrvu.onrender.com";
@@ -357,11 +320,9 @@
     async function sendMessage() {
         if (sendBtn.disabled) return;
         const message = messageInput.value.trim();
-        const sessionId = sessionIdInput.value.trim();
         const variant = promptVariantSelect.value;
 
         if (!message) return alert('Please type a message');
-        if (!sessionId) return alert('Session ID is required');
 
         addMessage(message, 'user');
         messageInput.value = '';
@@ -375,7 +336,7 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    session_id: sessionId,
+                    session_id: 'default-session',
                     prompt_variant: variant,
                     message: message
                 })
@@ -385,7 +346,6 @@
 
             const data = await response.json();
 
-            // Replace loading message with actual response (instead of removing)
             const loadingElement = document.getElementById(loadingId);
             if (loadingElement) {
                 loadingElement.innerHTML = `<div class="message-content">${escapeHtml(data.response || 'No response text')}</div>`;
@@ -393,7 +353,6 @@
 
         } catch (err) {
             console.error(err);
-            // Replace loading with error message
             const loadingElement = document.getElementById(loadingId);
             if (loadingElement) {
                 loadingElement.innerHTML = `<div class="message-content">${escapeHtml(`Error: ${err.message}`)}</div>`;
@@ -403,7 +362,6 @@
         }
     }
 
-    // Add click event listener to send button
     sendBtn.addEventListener('click', sendMessage);
 
     function addMessage(text, sender, isLoading = false) {
@@ -429,7 +387,6 @@
         return div.innerHTML;
     }
 
-    // Enter to send (Shift+Enter = newline)
     messageInput.addEventListener('keydown', e => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -437,7 +394,6 @@
         }
     });
 
-    // Optional: Ctrl+Enter also sends
     document.addEventListener('keydown', e => {
         if (e.ctrlKey && e.key === 'Enter') sendMessage();
     });
@@ -445,7 +401,3 @@
 </body>
 
 </html>
-
-
-
-
