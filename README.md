@@ -12,6 +12,50 @@ A minimal but production-oriented chatbot service built with FastAPI, LangChain,
 - **Logging**: Per-module file-based logging
 - **Docker Ready**: Containerized deployment
 
+## Live Deployment
+
+This project is fully deployed using free-tier cloud infrastructure for demonstration and testing.
+
+### Frontend (GitHub Pages)
+Static HTML and JavaScript frontend deployed on GitHub Pages.
+
+Live URL:
+https://shivamsonawane2003.github.io/MLOps_task/
+
+---
+
+### Backend (Render – Free Plan)
+FastAPI backend deployed using Docker on Render’s free tier.
+
+Base URL:
+https://mlops-task-jrvu.onrender.com
+
+API Documentation (Swagger):
+https://mlops-task-jrvu.onrender.com/docs
+
+Health Check:
+https://mlops-task-jrvu.onrender.com/health
+
+---
+
+### Deployed Architecture
+
+Browser (GitHub Pages)
+        |
+        | HTTPS (POST /chat)
+        v
+FastAPI Backend (Render)
+        |
+        | LangGraph Router
+        |-- Calculator Node
+        |-- Gemini LLM Node
+
+---
+
+### Free Tier Notes
+
+- Render free instances sleep after inactivity
+- First request may take 30–60 seconds due to cold start
 ## Project Structure
 
 ```
@@ -199,7 +243,7 @@ Three prompt variants are defined in `llm.py`:
 - **friendly**: Conversational, approachable tone
 - **minimal**: Very brief answers
 
-The **professional** variant is used by default. Switch by changing `DEFAULT_PROMPT_KEY` in `llm.py`.
+The **professional** variant is used by default. Switch by changing `DEFAULT_PROMPT_KEY` in `llm.py` or Change the Variant in the live_test_ui where you can see the dropdown to select the Variant 
 
 ## Monitoring
 
