@@ -138,7 +138,7 @@ def build_graph():
         }
     )
     
-    # Add final edges to end (no need to add end node explicitly)
+    # Connect the last steps so the process finishes (no separate end step is needed).
     graph.add_edge("calculator", "__end__")
     graph.add_edge("llm", "__end__")
     
