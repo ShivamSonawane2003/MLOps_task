@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from app.graph import get_graph, ChatState
 from app.monitoring import RequestTimer, record_request
 from app.logging_utils import setup_logger
+from fastapi.middleware.cors import CORSMiddleware
 
 # Load environment variables from .env file
 env_path = Path(__file__).parent.parent / ".env"
@@ -15,6 +16,15 @@ load_dotenv(dotenv_path=env_path)
 logger = setup_logger(__name__)
 
 app = FastAPI(title="LLM Chatbot Service", version="1.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://shivamsonawane2003.github.io"
+    ],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Mount static files
 static_dir = Path(__file__).parent / "static"
@@ -128,4 +138,4 @@ def test_ui():
 if __name__ == "__main__":
     import uvicorn
     logger.info("Starting FastAPI server")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
