@@ -61,7 +61,7 @@ class GeminiChainWrapper:
         logger.info("Gemini API call completed successfully")
         logger.info("-"*60)
         
-        # Return object with content attribute for compatibility
+        # Return an object that has a content field so it works everywhere.
         class Response:
             def __init__(self, text):
                 self.content = text
