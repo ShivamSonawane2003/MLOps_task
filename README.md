@@ -18,7 +18,7 @@ A minimal but production-oriented chatbot service built with FastAPI, LangChain,
 .
 ├── app/
 │   ├── main.py            # FastAPI entry point
-│   ├── llm.py             # OpenAI model and prompts
+│   ├── llm.py             # Gemini-2.5-Flash model and prompts
 │   ├── memory.py          # Session memory management
 │   ├── graph.py           # LangGraph DAG definition
 │   ├── calculator.py      # Calculator node
