@@ -1,0 +1,16 @@
+2026-02-03 23:04:55,891 - app.memory - INFO - Created memory for session: test_logging
+2026-02-03 23:04:59,069 - app.memory - INFO - Added message to session test_logging
+2026-02-03 23:14:36,202 - app.memory - INFO - Created memory for session: test3
+2026-02-03 23:14:39,663 - app.memory - INFO - Added message to session test3
+2026-02-03 23:15:05,515 - app.memory - INFO - Created memory for session: test4
+2026-02-03 23:15:11,809 - app.memory - INFO - Added message to session test4
+2026-02-03 23:15:27,713 - app.memory - INFO - Created memory for session: test5
+2026-02-03 23:15:34,153 - app.memory - INFO - Added message to session test5
+2026-02-03 23:16:03,959 - app.memory - INFO - Created memory for session: memory_test
+2026-02-03 23:16:10,800 - app.memory - INFO - Added message to session memory_test
+2026-02-03 23:16:34,963 - app.memory - INFO - Added message to session memory_test
+2026-02-03 23:16:44,393 - app.memory - INFO - Added message to session memory_test
+2026-02-03 23:26:25,330 - app.memory - INFO - Created memory for session: log_test2
+2026-02-03 23:26:32,410 - app.memory - INFO - Added message to session log_test2
+2026-02-03 23:29:43,707 - app.memory - INFO - Created memory for session: fixed_test2
+2026-02-03 23:29:51,217 - app.memory - INFO - Added message to session fixed_test2

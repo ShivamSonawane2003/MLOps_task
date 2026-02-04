@@ -1,0 +1,41 @@
+2026-02-03 23:26:25,330 - app.llm - INFO - ============================================================
+2026-02-03 23:26:25,330 - app.llm - INFO - INITIALIZING GOOGLE GEMINI LLM
+2026-02-03 23:26:25,330 - app.llm - INFO - API Key: AIzaSyDu-V...B3yk
+2026-02-03 23:26:25,330 - app.llm - INFO - Model: gemini-2.5-flash
+2026-02-03 23:26:25,330 - app.llm - INFO - Gemini LLM initialized successfully
+2026-02-03 23:26:25,330 - app.llm - INFO - ============================================================
+2026-02-03 23:26:25,330 - app.llm - INFO - Getting prompt template for variant: 'minimal'
+2026-02-03 23:26:25,330 - app.llm - INFO - Prompt template loaded successfully for variant 'minimal'
+2026-02-03 23:26:25,333 - app.llm - INFO - ------------------------------------------------------------
+2026-02-03 23:26:25,333 - app.llm - INFO - GEMINI API CALL
+2026-02-03 23:26:25,333 - app.llm - INFO - Prompt Length: 51 characters
+2026-02-03 23:26:25,333 - app.llm - INFO - Prompt: Answer concisely.
+
+User: What is Docker?
+Assistant:
+2026-02-03 23:26:32,396 - app.llm - INFO - Response Length: 197 characters
+2026-02-03 23:26:32,396 - app.llm - INFO - Response: Docker is an open-source platform that automates the deployment, scaling, and management of applications by using OS-level virtualization to deliver software in isolated packages called containers.
+2026-02-03 23:26:32,410 - app.llm - INFO - Gemini API call completed successfully
+2026-02-03 23:26:32,410 - app.llm - INFO - ------------------------------------------------------------
+2026-02-03 23:29:43,707 - app.llm - INFO - ============================================================
+2026-02-03 23:29:43,707 - app.llm - INFO - INITIALIZING GOOGLE GEMINI LLM
+2026-02-03 23:29:43,707 - app.llm - INFO - API Key: AIzaSyDu-V...B3yk
+2026-02-03 23:29:43,707 - app.llm - INFO - Model: gemini-2.5-flash
+2026-02-03 23:29:43,709 - app.llm - INFO - Gemini LLM initialized successfully
+2026-02-03 23:29:43,709 - app.llm - INFO - ============================================================
+2026-02-03 23:29:43,709 - app.llm - INFO - Getting prompt template for variant: 'friendly'
+2026-02-03 23:29:43,709 - app.llm - INFO - Prompt template loaded successfully for variant 'friendly'
+2026-02-03 23:29:43,709 - app.llm - INFO - ------------------------------------------------------------
+2026-02-03 23:29:43,709 - app.llm - INFO - GEMINI API CALL
+2026-02-03 23:29:43,709 - app.llm - INFO - Prompt Length: 154 characters
+2026-02-03 23:29:43,709 - app.llm - INFO - Prompt Preview: You are a friendly and helpful assistant. Be conversational and approachable.
+Keep responses clear and friendly.
+
+User: Explain FastAPI briefly
+Assist...
+2026-02-03 23:29:51,217 - app.llm - INFO - Response Length: 1966 characters
+2026-02-03 23:29:51,217 - app.llm - INFO - Response Preview: Hey there! Happy to explain FastAPI for you. It's a really popular and cool piece of tech!
+
+Imagine you're building a website or a mobile app. A lot of the time, the "brains" of the operation – where ...
+2026-02-03 23:29:51,217 - app.llm - INFO - Gemini API call completed successfully
+2026-02-03 23:29:51,217 - app.llm - INFO - ------------------------------------------------------------

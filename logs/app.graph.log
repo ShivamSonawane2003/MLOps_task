@@ -1,0 +1,77 @@
+2026-02-03 23:03:58,421 - app.graph - INFO - Routing to calculator: 10 + 5
+2026-02-03 23:03:58,438 - app.graph - INFO - Calculator result: The result is 15
+2026-02-03 23:04:03,043 - app.graph - INFO - LangGraph compiled successfully
+2026-02-03 23:04:05,372 - app.graph - INFO - LangGraph compiled successfully
+2026-02-03 23:04:55,871 - app.graph - INFO - [test_logging] ROUTER DECISION: LLM Node | Input: 'What is Python?'
+2026-02-03 23:04:55,885 - app.graph - INFO - [test_logging] LLM NODE PROCESSING: 'What is Python?' | Prompt Variant: professional
+2026-02-03 23:04:55,892 - app.graph - INFO - [test_logging] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:04:59,068 - app.graph - INFO - [test_logging] LLM NODE OUTPUT: Python is a high-level, interpreted, general-purpose programming language....
+2026-02-03 23:04:59,069 - app.graph - INFO - [test_logging] LLM NODE: Saved to conversation memory
+2026-02-03 23:05:30,626 - app.graph - INFO - [final_test] ROUTER DECISION: Calculator Node | Input: '100 * 25'
+2026-02-03 23:05:30,636 - app.graph - INFO - [final_test] CALCULATOR NODE PROCESSING: '100 * 25'
+2026-02-03 23:05:30,636 - app.graph - INFO - [final_test] CALCULATOR NODE OUTPUT: The result is 2500
+2026-02-03 23:13:08,984 - app.graph - INFO - LangGraph compiled successfully
+2026-02-03 23:13:31,201 - app.graph - INFO - [test1] ROUTER DECISION: Calculator Node | Input: '15 + 27'
+2026-02-03 23:13:31,210 - app.graph - INFO - [test1] CALCULATOR NODE PROCESSING: '15 + 27'
+2026-02-03 23:13:31,210 - app.graph - INFO - [test1] CALCULATOR NODE OUTPUT: The result is 42
+2026-02-03 23:13:44,492 - app.graph - INFO - [test2] ROUTER DECISION: Calculator Node | Input: '50 * 8'
+2026-02-03 23:13:44,503 - app.graph - INFO - [test2] CALCULATOR NODE PROCESSING: '50 * 8'
+2026-02-03 23:13:44,503 - app.graph - INFO - [test2] CALCULATOR NODE OUTPUT: The result is 400
+2026-02-03 23:14:36,186 - app.graph - INFO - [test3] ROUTER DECISION: LLM Node | Input: 'What is machine learning?'
+2026-02-03 23:14:36,202 - app.graph - INFO - [test3] LLM NODE PROCESSING: 'What is machine learning?' | Prompt Variant: professional
+2026-02-03 23:14:36,202 - app.graph - INFO - [test3] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:14:39,661 - app.graph - INFO - [test3] LLM NODE OUTPUT: Machine learning is a subset of artificial intelligence that enables systems to learn from data, identify patterns, and make decisions or predictions ...
+2026-02-03 23:14:39,663 - app.graph - INFO - [test3] LLM NODE: Saved to conversation memory
+2026-02-03 23:15:05,500 - app.graph - INFO - [test4] ROUTER DECISION: LLM Node | Input: 'Explain Python'
+2026-02-03 23:15:05,514 - app.graph - INFO - [test4] LLM NODE PROCESSING: 'Explain Python' | Prompt Variant: friendly
+2026-02-03 23:15:05,515 - app.graph - INFO - [test4] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:15:11,809 - app.graph - INFO - [test4] LLM NODE OUTPUT: Hey there! I'd be happy to explain Python!
+
+Imagine you want to tell your computer to do something specific, like organizing your photos, building a w...
+2026-02-03 23:15:11,809 - app.graph - INFO - [test4] LLM NODE: Saved to conversation memory
+2026-02-03 23:15:27,702 - app.graph - INFO - [test5] ROUTER DECISION: LLM Node | Input: 'Explain Python'
+2026-02-03 23:15:27,713 - app.graph - INFO - [test5] LLM NODE PROCESSING: 'Explain Python' | Prompt Variant: minimal
+2026-02-03 23:15:27,713 - app.graph - INFO - [test5] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:15:34,153 - app.graph - INFO - [test5] LLM NODE OUTPUT: Python is a high-level, interpreted, general-purpose programming language known for its simplicity, readability, and extensive libraries. It's widely ...
+2026-02-03 23:15:34,153 - app.graph - INFO - [test5] LLM NODE: Saved to conversation memory
+2026-02-03 23:16:03,948 - app.graph - INFO - [memory_test] ROUTER DECISION: LLM Node | Input: 'My name is Alex'
+2026-02-03 23:16:03,959 - app.graph - INFO - [memory_test] LLM NODE PROCESSING: 'My name is Alex' | Prompt Variant: professional
+2026-02-03 23:16:03,959 - app.graph - INFO - [memory_test] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:16:10,800 - app.graph - INFO - [memory_test] LLM NODE OUTPUT: Hello Alex....
+2026-02-03 23:16:10,800 - app.graph - INFO - [memory_test] LLM NODE: Saved to conversation memory
+2026-02-03 23:16:28,687 - app.graph - INFO - [memory_test] ROUTER DECISION: LLM Node | Input: 'I work as a data scientist'
+2026-02-03 23:16:28,701 - app.graph - INFO - [memory_test] LLM NODE PROCESSING: 'I work as a data scientist' | Prompt Variant: professional
+2026-02-03 23:16:28,701 - app.graph - INFO - [memory_test] LLM NODE: Using conversation history (memory active)
+2026-02-03 23:16:28,701 - app.graph - INFO - [memory_test] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:16:34,963 - app.graph - INFO - [memory_test] LLM NODE OUTPUT: Noted, Alex....
+2026-02-03 23:16:34,963 - app.graph - INFO - [memory_test] LLM NODE: Saved to conversation memory
+2026-02-03 23:16:42,263 - app.graph - INFO - [memory_test] ROUTER DECISION: LLM Node | Input: 'What is my name and job?'
+2026-02-03 23:16:42,284 - app.graph - INFO - [memory_test] LLM NODE PROCESSING: 'What is my name and job?' | Prompt Variant: professional
+2026-02-03 23:16:42,284 - app.graph - INFO - [memory_test] LLM NODE: Using conversation history (memory active)
+2026-02-03 23:16:42,284 - app.graph - INFO - [memory_test] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:16:44,392 - app.graph - INFO - [memory_test] LLM NODE OUTPUT: Your name is Alex, and your job is a data scientist....
+2026-02-03 23:16:44,393 - app.graph - INFO - [memory_test] LLM NODE: Saved to conversation memory
+2026-02-03 23:24:33,845 - app.graph - INFO - LangGraph compiled successfully
+2026-02-03 23:25:27,540 - app.graph - INFO - LangGraph compiled successfully
+2026-02-03 23:26:15,871 - app.graph - INFO - [log_test1] ROUTER DECISION: Calculator Node | Input: '25 * 4'
+2026-02-03 23:26:15,879 - app.graph - INFO - [log_test1] CALCULATOR NODE PROCESSING: '25 * 4'
+2026-02-03 23:26:15,879 - app.graph - INFO - [log_test1] CALCULATOR NODE OUTPUT: The result is 100
+2026-02-03 23:26:25,314 - app.graph - INFO - [log_test2] ROUTER DECISION: LLM Node | Input: 'What is Docker?'
+2026-02-03 23:26:25,330 - app.graph - INFO - [log_test2] LLM NODE PROCESSING: 'What is Docker?' | Prompt Variant: minimal
+2026-02-03 23:26:25,333 - app.graph - INFO - [log_test2] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:26:32,410 - app.graph - INFO - [log_test2] LLM NODE OUTPUT: Docker is an open-source platform that automates the deployment, scaling, and management of applications by using OS-level virtualization to deliver s...
+2026-02-03 23:26:32,410 - app.graph - INFO - [log_test2] LLM NODE: Saved to conversation memory
+2026-02-03 23:29:04,789 - app.graph - INFO - LangGraph compiled successfully
+2026-02-03 23:29:23,546 - app.graph - INFO - [fixed_test1] ROUTER DECISION: Calculator Node | Input: '150 / 5'
+2026-02-03 23:29:23,551 - app.graph - INFO - [fixed_test1] CALCULATOR NODE PROCESSING: '150 / 5'
+2026-02-03 23:29:23,551 - app.graph - INFO - [fixed_test1] CALCULATOR NODE OUTPUT: The result is 30.0
+2026-02-03 23:29:43,690 - app.graph - INFO - [fixed_test2] ROUTER DECISION: LLM Node | Input: 'Explain FastAPI briefly'
+2026-02-03 23:29:43,707 - app.graph - INFO - [fixed_test2] LLM NODE PROCESSING: 'Explain FastAPI briefly' | Prompt Variant: friendly
+2026-02-03 23:29:43,709 - app.graph - INFO - [fixed_test2] LLM NODE: Calling Google Gemini API...
+2026-02-03 23:29:51,217 - app.graph - INFO - [fixed_test2] LLM NODE OUTPUT: Hey there! Happy to explain FastAPI for you. It's a really popular and cool piece of tech!
+
+Imagine you're building a website or a mobile app. A lot o...
+2026-02-03 23:29:51,217 - app.graph - INFO - [fixed_test2] LLM NODE: Saved to conversation memory
+2026-02-03 23:30:34,510 - app.graph - INFO - [comprehensive_test] ROUTER DECISION: Calculator Node | Input: '200 - 55'
+2026-02-03 23:30:34,520 - app.graph - INFO - [comprehensive_test] CALCULATOR NODE PROCESSING: '200 - 55'
+2026-02-03 23:30:34,520 - app.graph - INFO - [comprehensive_test] CALCULATOR NODE OUTPUT: The result is 145

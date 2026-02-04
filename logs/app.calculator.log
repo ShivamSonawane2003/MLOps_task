@@ -1,0 +1,7 @@
+2026-02-03 23:03:58,438 - app.calculator - INFO - Evaluated: 10+5 = 15
+2026-02-03 23:05:30,636 - app.calculator - INFO - Evaluated: 100*25 = 2500
+2026-02-03 23:13:31,210 - app.calculator - INFO - Evaluated: 15+27 = 42
+2026-02-03 23:13:44,503 - app.calculator - INFO - Evaluated: 50*8 = 400
+2026-02-03 23:26:15,879 - app.calculator - INFO - Evaluated: 25*4 = 100
+2026-02-03 23:29:23,551 - app.calculator - INFO - Evaluated: 150/5 = 30.0
+2026-02-03 23:30:34,520 - app.calculator - INFO - Evaluated: 200-55 = 145
