@@ -8,7 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ ./app/
 
 ENV PYTHONUNBUFFERED=1
-ENV GEMINI_API_KEY=""
 
 EXPOSE 8000
 
