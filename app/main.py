@@ -52,17 +52,7 @@ def startup_event():
 
 
 @app.post("/chat")
-def chat(request: ChatRequest) -> ChatResponse:
-    """
-    Chat endpoint.
-    
-    Args:
-        request: ChatRequest with session_id and message
-    
-    Returns:
-        ChatResponse with AI response
-    """
-    
+def chat(request: ChatRequest) -> ChatResponse:   
     with RequestTimer() as timer:
         session_id = request.session_id
         message = request.message
@@ -114,13 +104,11 @@ def chat(request: ChatRequest) -> ChatResponse:
 
 @app.get("/health")
 def health_check():
-    """Health check endpoint."""
     return {"status": "healthy"}
 
 
 @app.get("/metrics")
 def get_metrics_endpoint():
-    """Get current monitoring metrics."""
     from app.monitoring import get_metrics
     metrics = get_metrics()
     return metrics
@@ -128,7 +116,6 @@ def get_metrics_endpoint():
 
 @app.get("/test_ui", response_class=HTMLResponse)
 def test_ui():
-    """Serve test UI from static/index.html."""
     html_file = Path(__file__).parent / "static" / "index.html"
     if html_file.exists():
         return FileResponse(html_file, media_type="text/html")
