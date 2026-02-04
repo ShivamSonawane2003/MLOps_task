@@ -5,7 +5,6 @@ logger = setup_logger(__name__)
 
 
 class MetricsStore:
-    """Singleton to store metrics across requests."""
     _instance = None
     _request_count = 0
     _total_latency = 0.0
@@ -30,13 +29,10 @@ class MetricsStore:
         self._request_count = 0
         self._total_latency = 0.0
 
-
-# Create singleton instance
 _metrics = MetricsStore()
 
 
 class RequestTimer:
-    """Context manager for measuring request latency."""
     
     def __init__(self, operation_name="request"):
         self.operation_name = operation_name
@@ -61,8 +57,7 @@ class RequestTimer:
 
 def record_request(latency_seconds, session_id=None, route_taken=None, message_preview=None):
     """Log a completed request and update metrics."""
-    
-    # Handle None latency (e.g., when exception occurs before timer completes)
+    # Handle None latency
     if latency_seconds is None:
         logger.warning("Attempted to record request with None latency")
         return
@@ -72,7 +67,6 @@ def record_request(latency_seconds, session_id=None, route_taken=None, message_p
     
     avg_latency = total_latency / request_count
     
-    logger.info("\n" + "="*70)
     logger.info(f"REQUEST #{request_count} COMPLETED")
     logger.info("="*70)
     
@@ -85,7 +79,6 @@ def record_request(latency_seconds, session_id=None, route_taken=None, message_p
     if route_taken:
         logger.info(f"Route Taken: {route_taken}")
     
-    logger.info("-"*70)
     logger.info(f"REQUEST METRICS:")
     logger.info(f"  |- Request Latency: {latency_seconds:.3f}s ({latency_seconds*1000:.0f}ms)")
     logger.info(f"  |- Average Latency: {avg_latency:.3f}s ({avg_latency*1000:.0f}ms)")
@@ -104,17 +97,12 @@ def record_request(latency_seconds, session_id=None, route_taken=None, message_p
 
 
 def get_metrics():
-    """Get current metrics."""
     request_count, total_latency = _metrics.get_stats()
     avg_latency = total_latency / request_count if request_count > 0 else 0
-    
-    logger.info("\n" + "="*50)
     logger.info("METRICS SUMMARY REQUESTED")
-    logger.info("="*50)
     logger.info(f"Total Requests: {request_count}")
     logger.info(f"Total Latency: {total_latency:.3f}s")
     logger.info(f"Average Latency: {avg_latency:.3f}s")
-    logger.info("="*50 + "\n")
     
     return {
         "request_count": request_count,
